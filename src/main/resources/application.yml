@@ -1,0 +1,5 @@
+jdbc:
+  mysql:
+    url: jdbc:mysql://localhost:3306/tarotPointCounter
+    username: sulyvan
+    password: toto
