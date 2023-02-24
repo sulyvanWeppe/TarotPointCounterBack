@@ -4,10 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 public class PlayersScorePatchRequest {
-    private int gameId;
+    private String gameUuid;
     @JsonProperty("playersScore")
     private List<PlayerScorePatchRequest> playerScorePatchRequests;
 }

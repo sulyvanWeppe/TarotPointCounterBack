@@ -3,25 +3,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sulwep7.tarotpointcounterback.mapper.PlayersScoreMapper">
     <resultMap id="playerScoreResultMap" type="com.sulwep7.tarotpointcounterback.model.PlayerScore">
-        <id property="gameId" column="gameId"/>
+        <id property="gameUuid" column="gameUuid"/>
         <result property="playerName" column="playerName"/>
         <result property="playerScore" column="playerScore"/>
     </resultMap>
 
-    <select id="getPlayersScoreOfGame" resultMap="playerScoreResultMap" parameterType="int">
+    <select id="getPlayersScoreOfGame" resultMap="playerScoreResultMap" parameterType="java.lang.String">
         select * from players_score
-        where gameId = #{GAME_ID};
+        where gameId = #{GAME_UUID};
     </select>
 
     <insert id="insertPlayerScore">
-        insert into players_score(gameId,playerName,playerScore)
-        values(#{GAME_ID},#{PLAYER_NAME},#{PLAYER_SCORE});
+        insert into players_score(gameUuid,playerName,playerScore)
+        values(#{GAME_UUID},#{PLAYER_NAME},#{PLAYER_SCORE});
     </insert>
 
     <update id="updatePlayerScore">
         update players_score
         set playerScore = #{PLAYER_SCORE}
-        where gameId = #{GAME_ID}
+        where gameUuid = #{GAME_UUID}
         and playerName = #{PLAYER_NAME};
     </update>
 </mapper>

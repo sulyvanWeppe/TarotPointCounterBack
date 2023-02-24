@@ -7,11 +7,12 @@ import org.apache.ibatis.annotations.Select;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.UUID;
 
 @Mapper
 public interface GameMapper {
 
     List<Game> getAllGames();
 
-    void insertGame(@Param("TIMESTAMP")Timestamp timestamp, @Param("NR_PLAYERS")int nrPlayers);
+    void insertGame(@Param("UUID") String uuid, @Param("TIMESTAMP")Timestamp timestamp, @Param("NR_PLAYERS")int nrPlayers);
 }

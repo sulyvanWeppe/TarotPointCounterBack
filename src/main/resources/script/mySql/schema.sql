@@ -1,15 +1,15 @@
 CREATE TABLE game(
-	id int NOT NULL AUTO_INCREMENT,
+	uuid VARCHAR(36) NOT NULL,
 	timestamp timestamp NOT NULL,
 	nrPlayers int NOT NULL,
-	PRIMARY KEY (id)
+	PRIMARY KEY (uuid)
 );
 
 
 CREATE TABLE players_score (
-	gameId int,
+	gameUuid VARCHAR(36),
 	playerName VARCHAR(100) NOT NULL,
 	playerScore int NOT NULL,
-	PRIMARY KEY(gameId,playerName),
-	FOREIGN KEY (gameId) references game(id)
+	PRIMARY KEY(gameUuid,playerName),
+	FOREIGN KEY (gameUuid) references game(uuid)
 );

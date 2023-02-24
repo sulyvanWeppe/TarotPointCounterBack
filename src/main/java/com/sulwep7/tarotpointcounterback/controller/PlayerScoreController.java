@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/scores")
 public class PlayerScoreController {
@@ -19,7 +21,7 @@ public class PlayerScoreController {
     @PostMapping
     public ResponseEntity<String> insertPlayerScore(@RequestBody PlayerScore newPlayerScore) {
         try {
-            playersScoreService.insertPlayerScore(newPlayerScore.getGameId(),newPlayerScore.getPlayerName(),newPlayerScore.getPlayerScore());
+            playersScoreService.insertPlayerScore(newPlayerScore.getGameUuid(),newPlayerScore.getPlayerName(),newPlayerScore.getPlayerScore());
         } catch(Exception e) {
             return new ResponseEntity<>("Error inserting the new player score in the DB", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -30,9 +32,9 @@ public class PlayerScoreController {
 
     @PatchMapping
     public ResponseEntity<String> updatePlayersScore(@RequestBody PlayersScorePatchRequest playersScorePatchRequest) {
-        int gameId = playersScorePatchRequest.getGameId();
+        String gameUuid = playersScorePatchRequest.getGameUuid();
         try {
-            playersScoreService.updatePlayersScore(gameId,playersScorePatchRequest.getPlayerScorePatchRequests());
+            playersScoreService.updatePlayersScore(gameUuid,playersScorePatchRequest.getPlayerScorePatchRequests());
         } catch(Exception e) {
             return new ResponseEntity<>("Error when trying to update the scores",HttpStatus.INTERNAL_SERVER_ERROR);
         }

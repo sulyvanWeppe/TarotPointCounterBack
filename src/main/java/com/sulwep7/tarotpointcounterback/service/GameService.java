@@ -10,6 +10,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Slf4j
@@ -21,10 +22,13 @@ public class GameService {
         return gameMapper.getAllGames();
     }
 
-    public void insertNewGame(int nrPlayers) throws Exception {
+    public UUID insertNewGame(int nrPlayers) throws Exception {
         try {
+            UUID uuid = UUID.randomUUID();
             log.info("Insert new game of {} players",nrPlayers);
-            gameMapper.insertGame(Timestamp.from(Instant.now()),nrPlayers);
+            gameMapper.insertGame(uuid.toString(),Timestamp.from(Instant.now()),nrPlayers);
+
+            return uuid;
         } catch(Exception e) {
             log.error("Error while inserting new Game : [{}]",e);
             throw new Exception("Error inserting the new game in the DB");

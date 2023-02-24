@@ -5,12 +5,13 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.UUID;
 
 @Mapper
 public interface PlayersScoreMapper {
 
-    List<PlayerScore> getPlayersScoreOfGame(@Param("GAME_ID")int gameId);
-    void insertPlayerScore(@Param("GAME_ID")int gameId, @Param("PLAYER_NAME")String playerName, @Param("PLAYER_SCORE")int playerScore);
+    List<PlayerScore> getPlayersScoreOfGame(@Param("GAME_UUID")String gameUuid);
+    void insertPlayerScore(@Param("GAME_UUID")String gameUuid, @Param("PLAYER_NAME")String playerName, @Param("PLAYER_SCORE")int playerScore);
 
-    void updatePlayerScore(@Param("GAME_ID")int gameId, @Param("PLAYER_NAME")String playerName, @Param("PLAYER_SCORE")int playerScore);
+    void updatePlayerScore(@Param("GAME_UUID") String gameUuid, @Param("PLAYER_NAME")String playerName, @Param("PLAYER_SCORE")int playerScore);
 }

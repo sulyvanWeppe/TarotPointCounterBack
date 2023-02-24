@@ -5,10 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
 @AllArgsConstructor
 @Getter
 public class GameResponse extends Game{
-    private int id;
+    private String uuid;
     private Timestamp timestamp;
 }

@@ -3,10 +3,12 @@ package com.sulwep7.tarotpointcounterback.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.UUID;
+
 @AllArgsConstructor
 @Getter
 public class PlayerScore {
-    private int gameId;
+    private String gameUuid;
     private String playerName;
     private int playerScore;
 }
