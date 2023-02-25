@@ -24,4 +24,10 @@
         where gameUuid = #{GAME_UUID}
         and playerName = #{PLAYER_NAME};
     </update>
+
+    <delete id="deletePlayerScore">
+        delete from players_score
+        where gameUuid = #{GAME_UUID}
+        and playerName = #{PLAYER_NAME};
+    </delete>
 </mapper>

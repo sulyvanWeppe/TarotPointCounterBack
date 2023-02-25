@@ -14,4 +14,6 @@ public interface PlayersScoreMapper {
     void insertPlayerScore(@Param("GAME_UUID")String gameUuid, @Param("PLAYER_NAME")String playerName, @Param("PLAYER_SCORE")int playerScore);
 
     void updatePlayerScore(@Param("GAME_UUID") String gameUuid, @Param("PLAYER_NAME")String playerName, @Param("PLAYER_SCORE")int playerScore);
+
+    void deletePlayerScore(@Param("GAME_UUID") String gameUuid, @Param("PLAYER_NAME")String playerName);
 }
