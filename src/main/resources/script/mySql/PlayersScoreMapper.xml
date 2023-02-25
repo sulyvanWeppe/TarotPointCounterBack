@@ -10,7 +10,7 @@
 
     <select id="getPlayersScoreOfGame" resultMap="playerScoreResultMap" parameterType="java.lang.String">
         select * from players_score
-        where gameId = #{GAME_UUID};
+        where gameUuid = #{GAME_UUID};
     </select>
 
     <insert id="insertPlayerScore">

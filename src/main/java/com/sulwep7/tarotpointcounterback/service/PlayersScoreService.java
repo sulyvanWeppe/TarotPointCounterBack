@@ -29,6 +29,7 @@ public class PlayersScoreService {
     }
 
     public void insertPlayersScore(String gameUuid, List<PlayerScorePostRequest> playerScorePostRequestList) throws Exception{
+        log.info("Insert scores for game {}",gameUuid);
         for(int i=0; i<playerScorePostRequestList.size(); i++) {
             try {
                 PlayerScorePostRequest currentPlayer = playerScorePostRequestList.get(i);
@@ -62,6 +63,7 @@ public class PlayersScoreService {
 
     public void updatePlayersScore(String gameUuid, List<PlayerScorePatchRequest> playerScorePatchRequestList) throws Exception {
         //Save current scores in case a rollback is needed
+        log.info("Update scores for game {}",gameUuid);
         List<PlayerScore> previousScores = playersScoreMapper.getPlayersScoreOfGame(gameUuid);
 
         for(int i=0; i<playerScorePatchRequestList.size(); i++) {
