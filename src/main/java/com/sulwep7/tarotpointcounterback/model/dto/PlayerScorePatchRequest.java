@@ -1,4 +1,4 @@
-package com.sulwep7.tarotpointcounterback.model;
+package com.sulwep7.tarotpointcounterback.model.dto;
 
 import lombok.Getter;
 

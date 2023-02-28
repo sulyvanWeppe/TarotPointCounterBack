@@ -1,6 +1,6 @@
 package com.sulwep7.tarotpointcounterback.controller;
 
-import com.sulwep7.tarotpointcounterback.model.Game;
+import com.sulwep7.tarotpointcounterback.model.entity.Game;
 import com.sulwep7.tarotpointcounterback.service.GameService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

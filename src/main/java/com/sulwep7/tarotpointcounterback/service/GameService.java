@@ -1,14 +1,14 @@
 package com.sulwep7.tarotpointcounterback.service;
 
 import com.sulwep7.tarotpointcounterback.mapper.GameMapper;
-import com.sulwep7.tarotpointcounterback.model.Game;
+import com.sulwep7.tarotpointcounterback.model.entity.Game;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 

@@ -1,16 +1,14 @@
 package com.sulwep7.tarotpointcounterback.service;
 
 import com.sulwep7.tarotpointcounterback.mapper.PlayersScoreMapper;
-import com.sulwep7.tarotpointcounterback.model.PlayerScore;
-import com.sulwep7.tarotpointcounterback.model.PlayerScorePatchRequest;
-import com.sulwep7.tarotpointcounterback.model.PlayerScorePostRequest;
-import com.sulwep7.tarotpointcounterback.model.PlayersScorePostRequest;
+import com.sulwep7.tarotpointcounterback.model.entity.PlayerScore;
+import com.sulwep7.tarotpointcounterback.model.dto.PlayerScorePatchRequest;
+import com.sulwep7.tarotpointcounterback.model.dto.PlayerScorePostRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @Slf4j

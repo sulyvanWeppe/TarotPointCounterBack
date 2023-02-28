@@ -1,15 +1,14 @@
-package com.sulwep7.tarotpointcounterback.model;
+package com.sulwep7.tarotpointcounterback.model.dto;
 
+import com.sulwep7.tarotpointcounterback.model.entity.Game;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.util.UUID;
 
 @AllArgsConstructor
 @Getter
-public class GameResponse extends Game{
+public class GameResponse extends Game {
     private String uuid;
     private Timestamp timestamp;
 }

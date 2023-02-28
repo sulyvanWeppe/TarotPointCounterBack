@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sulwep7.tarotpointcounterback.mapper.PlayersScoreMapper">
-    <resultMap id="playerScoreResultMap" type="com.sulwep7.tarotpointcounterback.model.PlayerScore">
+    <resultMap id="playerScoreResultMap" type="com.sulwep7.tarotpointcounterback.model.entity.PlayerScore">
         <id property="gameUuid" column="gameUuid"/>
         <result property="playerName" column="playerName"/>
         <result property="playerScore" column="playerScore"/>

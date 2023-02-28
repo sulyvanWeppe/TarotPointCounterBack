@@ -1,11 +1,10 @@
 package com.sulwep7.tarotpointcounterback.mapper;
 
-import com.sulwep7.tarotpointcounterback.model.PlayerScore;
+import com.sulwep7.tarotpointcounterback.model.entity.PlayerScore;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.UUID;
 
 @Mapper
 public interface PlayersScoreMapper {
