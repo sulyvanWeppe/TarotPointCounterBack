@@ -2,6 +2,7 @@ package com.sulwep7.tarotpointcounterback.service;
 
 import com.sulwep7.tarotpointcounterback.mapper.GameMapper;
 import com.sulwep7.tarotpointcounterback.model.entity.Game;
+import com.sulwep7.tarotpointcounterback.model.entity.GameWDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,9 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -20,6 +23,15 @@ public class GameService {
 
     public List<Game> getGames() {
         return gameMapper.getAllGames();
+    }
+
+    public Map<String,List<GameWDetails>> getAllGamesWDetails() {
+        log.info("Get all games with their details");
+        List<GameWDetails> gameWDetailsList = gameMapper.getAllGamesWDetails();
+
+        Map<String,List<GameWDetails>> gamesWDetailsByUuid = gameWDetailsList.stream().collect(Collectors.groupingBy(GameWDetails::getGameUuid));
+
+        return gamesWDetailsByUuid;
     }
 
     public UUID insertNewGame(int nrPlayers) throws Exception {
