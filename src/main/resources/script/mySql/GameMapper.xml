@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sulwep7.tarotpointcounterback.mapper.GameMapper">
-    <resultMap id="gameResultMap" type="com.sulwep7.tarotpointcounterback.model.Game">
+    <resultMap id="gameResultMap" type="com.sulwep7.tarotpointcounterback.model.entity.Game">
         <id property="uuid" column="uuid"/>
         <result property="timestamp" column="timestamp"/>
         <result property="nrPlayers" column="nrPlayers"/>
@@ -16,4 +16,24 @@
         insert into game(uuid,timestamp,nrPlayers)
         values(#{UUID},#{TIMESTAMP},#{NR_PLAYERS});
     </insert>
+
+    <resultMap id="gameWDetailsResultMap" type="com.sulwep7.tarotpointcounterback.model.entity.GameWDetails">
+        <id property="gameUuid" column="uuid"/>
+        <result property="timestamp" column="timestamp"/>
+        <result property="nrPlayers" column="nrPlayers"/>
+        <result property="playerName" column="playerName"/>
+        <result property="playerScore" column="playerScore"/>
+    </resultMap>
+
+    <select id="getAllGamesWDetails" resultMap="gameWDetailsResultMap">
+        select g.uuid,
+            g.timestamp,
+            g.nrPlayers,
+            ps.playerName,
+            ps.playerScore
+        from game g
+        inner join players_score ps
+            on ps.gameUuid = g.uuid
+        order by g.uuid, g.timestamp desc;
+    </select>
 </mapper>

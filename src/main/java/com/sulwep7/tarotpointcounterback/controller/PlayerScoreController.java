@@ -1,8 +1,8 @@
 package com.sulwep7.tarotpointcounterback.controller;
 
-import com.sulwep7.tarotpointcounterback.model.PlayerScore;
-import com.sulwep7.tarotpointcounterback.model.PlayersScorePatchRequest;
-import com.sulwep7.tarotpointcounterback.model.PlayersScorePostRequest;
+import com.sulwep7.tarotpointcounterback.model.entity.PlayerScore;
+import com.sulwep7.tarotpointcounterback.model.dto.PlayersScorePatchRequest;
+import com.sulwep7.tarotpointcounterback.model.dto.PlayersScorePostRequest;
 import com.sulwep7.tarotpointcounterback.service.PlayersScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
