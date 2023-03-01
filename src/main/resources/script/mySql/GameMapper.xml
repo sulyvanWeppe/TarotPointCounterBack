@@ -31,8 +31,9 @@
             g.nrPlayers,
             ps.playerName,
             ps.playerScore
-        from games g
+        from game g
         inner join players_score ps
-            on ps.gameUuid = g.uuid;
+            on ps.gameUuid = g.uuid
+        order by g.uuid, g.timestamp desc;
     </select>
 </mapper>
