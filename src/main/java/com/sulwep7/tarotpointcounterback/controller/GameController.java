@@ -1,5 +1,6 @@
 package com.sulwep7.tarotpointcounterback.controller;
 
+import com.sulwep7.tarotpointcounterback.model.dto.GamePostRequest;
 import com.sulwep7.tarotpointcounterback.model.dto.GameWDetailsPlayerResponse;
 import com.sulwep7.tarotpointcounterback.model.dto.GameWDetailsResponse;
 import com.sulwep7.tarotpointcounterback.model.dto.GamesWDetailsResponse;
@@ -79,10 +80,12 @@ public class GameController {
     @PostMapping("/game")
     @ApiOperation(value = "Inserting new game")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "New game is inserted"),
+            @ApiResponse(code = 201, message = "New game is inserted",response = String.class, examples = @Example(
+                    value = @ExampleProperty(value = "toto")
+            )),
             @ApiResponse(code = 500, message = "Internal server error occurred")
     })
-    public ResponseEntity<String> insertGame(@ApiParam(value="New game to be inserted") @RequestBody Game newGame) {
+    public ResponseEntity<String> insertGame(@ApiParam(value="New game to be inserted") @RequestBody GamePostRequest newGame) {
          try {
              UUID uuid = gameService.insertNewGame(newGame.getNrPlayers());
 

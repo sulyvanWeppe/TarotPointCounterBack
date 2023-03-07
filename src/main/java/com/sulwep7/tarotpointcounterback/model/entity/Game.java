@@ -14,6 +14,10 @@ import java.sql.Timestamp;
 @Getter
 @ApiModel
 public class Game {
+    @ApiModelProperty(example = "65b68079-f5de-44f9-b871-9c46b0a8e85a")
+    private String uuid;
+    @ApiModelProperty(dataType = "Timestamp", example = "2023-03-02 14:30:23.280009788")
+    private Timestamp timestamp;
     @ApiModelProperty(example = "4")
     private int nrPlayers;
 }
