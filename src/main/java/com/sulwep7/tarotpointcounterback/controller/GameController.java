@@ -1,11 +1,13 @@
 package com.sulwep7.tarotpointcounterback.controller;
 
+import com.sulwep7.tarotpointcounterback.model.dto.GamePostRequest;
 import com.sulwep7.tarotpointcounterback.model.dto.GameWDetailsPlayerResponse;
 import com.sulwep7.tarotpointcounterback.model.dto.GameWDetailsResponse;
 import com.sulwep7.tarotpointcounterback.model.dto.GamesWDetailsResponse;
 import com.sulwep7.tarotpointcounterback.model.entity.Game;
 import com.sulwep7.tarotpointcounterback.model.entity.GameWDetails;
 import com.sulwep7.tarotpointcounterback.service.GameService;
+import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,11 @@ public class GameController {
     GameService gameService;
 
     @GetMapping("/games")
+    @ApiOperation(value = "Getting all the games")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The list of the games was successfully retrieved"),
+            @ApiResponse(code = 404, message = "No game was found")
+    })
     public ResponseEntity<List<Game>> getGames() {
         List<Game> games = gameService.getGames();
         if(games==null) {
@@ -37,6 +44,11 @@ public class GameController {
     }
 
     @GetMapping("/gamesWDetails")
+    @ApiOperation(value = "Getting all the games with their details. Their details include the number of players and for each one his name and score")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The list of the games with their details was retrieved"),
+            @ApiResponse(code = 404, message = "No game was found")
+    })
     public ResponseEntity<GamesWDetailsResponse> getAllGamesWDetails() {
         Map<String, List<GameWDetails>> gamesWDetailsByUuid = gameService.getAllGamesWDetails();
         if(gamesWDetailsByUuid==null) {
@@ -66,7 +78,14 @@ public class GameController {
     }
 
     @PostMapping("/game")
-    public ResponseEntity<String> insertGame(@RequestBody Game newGame) {
+    @ApiOperation(value = "Inserting new game")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "New game is inserted",response = String.class, examples = @Example(
+                    value = @ExampleProperty(value = "toto")
+            )),
+            @ApiResponse(code = 500, message = "Internal server error occurred")
+    })
+    public ResponseEntity<String> insertGame(@ApiParam(value="New game to be inserted") @RequestBody GamePostRequest newGame) {
          try {
              UUID uuid = gameService.insertNewGame(newGame.getNrPlayers());
 
