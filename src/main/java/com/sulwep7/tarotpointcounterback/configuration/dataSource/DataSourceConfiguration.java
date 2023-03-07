@@ -21,7 +21,6 @@ public class DataSourceConfiguration {
     @ConfigurationProperties(prefix = "jdbc.mysql")
     public DataSource mySqlDataSource() {
         PooledDataSource dataSource = new PooledDataSource();
-        dataSource.setDriver("com.mysql.cj.jdbc.Driver");
 
         return dataSource;
     }
