@@ -1,6 +1,13 @@
 jdbc:
   mysql:
-    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1;init=RUNSCRIPT FROM 'classpath:script/mySql/schema.sql'
     username: sa
     password:
     driver: org.h2.Driver
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+

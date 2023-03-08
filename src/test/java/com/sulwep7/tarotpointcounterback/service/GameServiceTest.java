@@ -4,13 +4,19 @@ import com.sulwep7.tarotpointcounterback.model.entity.Game;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 import java.util.UUID;
 
+//@RunWith(SpringRunner.class)
+//@MybatisTest(properties = {"mybatis.mapperLocations=classpath*:script/mySql/*.xml"})
 @SpringBootTest
 @Slf4j
 public class GameServiceTest {
