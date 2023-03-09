@@ -4,6 +4,8 @@ jdbc:
     username: sa
     password:
     driver: org.h2.Driver
+  init:
+    script: /script/mySql/data.sql
 
 spring:
   jpa:
