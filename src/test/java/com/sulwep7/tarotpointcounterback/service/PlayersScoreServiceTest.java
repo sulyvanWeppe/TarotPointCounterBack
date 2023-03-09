@@ -1,5 +1,8 @@
 package com.sulwep7.tarotpointcounterback.service;
 
+import com.sulwep7.tarotpointcounterback.model.dto.PlayerScorePatchRequest;
+import com.sulwep7.tarotpointcounterback.model.dto.PlayerScorePostRequest;
+import com.sulwep7.tarotpointcounterback.model.dto.PlayersScorePatchRequest;
 import com.sulwep7.tarotpointcounterback.model.entity.GameWDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
@@ -14,6 +17,7 @@ import org.springframework.util.ObjectUtils;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -46,38 +50,93 @@ public class PlayersScoreServiceTest {
         return gameUuid.toString();
     }
 
-    @Test
-    public void insertPlayerScore() throws Exception{
-        log.info("Test inserting player score");
+    private String createGameWPlayersOneByONe(int nrPlayers) throws Exception {
+        log.info("Step 1: create game of {} players",nrPlayers);
+        String gameUuid = createGame(nrPlayers);
 
-        log.info("Step 1: create game of 3 players");
-        String gameUuid = createGame(3);
-        log.info("Game created with Uuid {}",gameUuid);
-        Assertions.assertNotNull(gameUuid);
+        log.info("Step 2: create {} player scores for game {} at the same time",nrPlayers,gameUuid);
+        for(int i=0; i<nrPlayers; i++) {
+            playersScoreService.insertPlayerScore(gameUuid,"player"+i,0);
 
-        log.info("Step 2: create 3 player score for game {}",gameUuid);
-        playersScoreService.insertPlayerScore(gameUuid,"player1",0);
-        playersScoreService.insertPlayerScore(gameUuid,"player2",0);
-        playersScoreService.insertPlayerScore(gameUuid,"player3",0);
-
+        }
         Map<String,List<GameWDetails>> allGames = gameService.getAllGamesWDetails();
         List<GameWDetails> gameWDetailsList = allGames.get(gameUuid);
         log.info("Retrieve {} player's detail for game {}",gameWDetailsList.size(),gameUuid);
-        Assertions.assertTrue(gameWDetailsList!=null && gameWDetailsList.size()==3);
+        Assertions.assertTrue(gameWDetailsList!=null && gameWDetailsList.size()==nrPlayers);
 
-        GameWDetails gameWDetailsPlayer1 = gameWDetailsList.get(0);
-        GameWDetails gameWDetailsPlayer2 = gameWDetailsList.get(1);
-        GameWDetails gameWDetailsPlayer3 = gameWDetailsList.get(2);
-        Assertions.assertTrue(gameWDetailsPlayer1.getPlayerName().equals("player1") && gameWDetailsPlayer1.getPlayerScore()==0);
-        Assertions.assertTrue(gameWDetailsPlayer2.getPlayerName().equals("player2") && gameWDetailsPlayer2.getPlayerScore()==0);
-        Assertions.assertTrue(gameWDetailsPlayer3.getPlayerName().equals("player3") && gameWDetailsPlayer3.getPlayerScore()==0);
+        for(int i=0; i<nrPlayers; i++) {
+            GameWDetails gameWDetailsPlayer = gameWDetailsList.get(i);
+            Assertions.assertTrue(gameWDetailsPlayer.getPlayerName().equals("player"+i) && gameWDetailsPlayer.getPlayerScore()==0);
+        }
+
+        return gameUuid;
     }
 
     @Test
-    private void insertPlayersScore() throws Exception{
+    public void insertPlayerScore() throws Exception{
+        log.info("Test inserting player score (insert players one by one)");
+        createGameWPlayersOneByONe(3);
+    }
+
+    private String createGameWPlayersGrouped(int nrPlayers) throws Exception {
+        log.info("Step 1: create game of {} players",nrPlayers);
+        String gameUuid = createGame(nrPlayers);
+        Assertions.assertNotNull(gameUuid);
+
+        log.info("Step 2: create {} player scores for game {} at the same time",nrPlayers,gameUuid);
+        List<PlayerScorePostRequest> playerScorePostRequestList = new ArrayList<>();
+        for(int i=0; i<nrPlayers; i++) {
+            PlayerScorePostRequest playerScorePostRequest = PlayerScorePostRequest.builder()
+                    .playerName("Player"+i)
+                    .playerScore(0)
+                    .build();
+            playerScorePostRequestList.add(playerScorePostRequest);
+        }
+        playersScoreService.insertPlayersScore(gameUuid,playerScorePostRequestList);
+        Map<String,List<GameWDetails>> allGames = gameService.getAllGamesWDetails();
+        List<GameWDetails> gameWDetailsList = allGames.get(gameUuid);
+        log.info("Retrieve {} player's details for game {}",gameWDetailsList.size(),gameUuid);
+        Assertions.assertTrue(gameWDetailsList!=null && gameWDetailsList.size()==nrPlayers);
+
+        for(int i=0; i<nrPlayers; i++) {
+            GameWDetails gameWDetailsPlayer = gameWDetailsList.get(i);
+            Assertions.assertTrue(gameWDetailsPlayer.getPlayerName().equals("Player"+i) && gameWDetailsPlayer.getPlayerScore()==0);
+        }
+
+        return gameUuid;
+    }
+
+    @Test
+    public void insertPlayersScore() throws Exception{
         log.info("Test inserting multiple player scores for 1 game");
 
-        log.info("Step 1: create game of 3 players");
-        String gameUuid = createGame(3);//HEREEEEEEEE
+        createGameWPlayersGrouped(3);
+    }
+
+    @Test
+    public void updatePlayersScore() throws Exception{
+        log.info("Test updating score of all players for a given game");
+
+        String gameUuid = createGameWPlayersGrouped(3);
+
+        log.info("Step 3: update players");
+        List<PlayerScorePatchRequest> playerScorePatchRequestList = new ArrayList<>();
+        for(int i=0; i<3; i++) {
+            PlayerScorePatchRequest playerScorePatchRequest = PlayerScorePatchRequest.builder()
+                    .playerName("Player"+i)
+                    .playerScore(10)
+                    .build();
+            playerScorePatchRequestList.add(playerScorePatchRequest);
+        }
+
+        playersScoreService.updatePlayersScore(gameUuid,playerScorePatchRequestList);
+
+        //Check scores correctly updated
+        Map<String,List<GameWDetails>> allGames = gameService.getAllGamesWDetails();
+        List<GameWDetails> gamePlayers = allGames.get(gameUuid);
+        for(int i=0; i<3; i++) {
+            GameWDetails player = gamePlayers.get(i);
+            Assertions.assertTrue(player.getPlayerScore()==10);
+        }
     }
 }
