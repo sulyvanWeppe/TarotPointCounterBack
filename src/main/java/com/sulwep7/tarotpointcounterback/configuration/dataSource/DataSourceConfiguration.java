@@ -21,7 +21,6 @@ public class DataSourceConfiguration {
     @ConfigurationProperties(prefix = "jdbc.mysql")
     public DataSource mySqlDataSource() {
         PooledDataSource dataSource = new PooledDataSource();
-        dataSource.setDriver("com.mysql.cj.jdbc.Driver");
 
         return dataSource;
     }
@@ -30,7 +29,7 @@ public class DataSourceConfiguration {
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(mySqlDataSource());
-        factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("script/mySql/*.xml"));
+        factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:script/mySql/*.xml"));
 
         return factoryBean.getObject();
     }
