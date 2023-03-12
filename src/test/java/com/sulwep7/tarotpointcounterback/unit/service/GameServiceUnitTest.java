@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.mockito.BDDMockito.*;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 
 import java.sql.Timestamp;

@@ -3,7 +3,6 @@ package com.sulwep7.tarotpointcounterback.unit.service;
 import com.sulwep7.tarotpointcounterback.mapper.PlayersScoreMapper;
 import com.sulwep7.tarotpointcounterback.service.PlayersScoreService;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
