@@ -1,9 +1,10 @@
-package com.sulwep7.tarotpointcounterback.service;
+package com.sulwep7.tarotpointcounterback.integration.service;
 
 import com.sulwep7.tarotpointcounterback.model.dto.PlayerScorePatchRequest;
 import com.sulwep7.tarotpointcounterback.model.dto.PlayerScorePostRequest;
-import com.sulwep7.tarotpointcounterback.model.dto.PlayersScorePatchRequest;
 import com.sulwep7.tarotpointcounterback.model.entity.GameWDetails;
+import com.sulwep7.tarotpointcounterback.service.GameService;
+import com.sulwep7.tarotpointcounterback.service.PlayersScoreService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,7 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
-import org.springframework.util.ObjectUtils;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -25,8 +25,8 @@ import java.util.UUID;
 
 @SpringBootTest
 @Slf4j
-@EnabledIf(expression = "#{environment['spring.profiles.active'] == 'integration-test'}")
-public class PlayersScoreServiceTest {
+@EnabledIf(expression = "#{environment['spring.profiles.active'] == 'integration-test'}", loadContext = true)
+public class PlayersScoreServiceIntegrationTest {
 
     @Autowired
     private PlayersScoreService playersScoreService;

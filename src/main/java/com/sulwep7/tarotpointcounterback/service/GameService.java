@@ -3,6 +3,7 @@ package com.sulwep7.tarotpointcounterback.service;
 import com.sulwep7.tarotpointcounterback.mapper.GameMapper;
 import com.sulwep7.tarotpointcounterback.model.entity.Game;
 import com.sulwep7.tarotpointcounterback.model.entity.GameWDetails;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,12 +17,14 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@Setter
 @Slf4j
 public class GameService {
     @Autowired
     GameMapper gameMapper;
 
     public List<Game> getGames() {
+        log.info("Get all games");
         return gameMapper.getAllGames();
     }
 
