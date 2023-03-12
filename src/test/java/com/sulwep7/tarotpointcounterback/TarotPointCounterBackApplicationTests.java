@@ -16,11 +16,7 @@ import java.util.UUID;
 @Slf4j
 class TarotPointCounterBackApplicationTests {
 
-	@Autowired
-	Environment environment;
-
 	@Test
 	void contextLoads() {
-		Arrays.stream(environment.getActiveProfiles()).forEach(profile -> log.info("active profile : {}",profile));
 	}
 }
