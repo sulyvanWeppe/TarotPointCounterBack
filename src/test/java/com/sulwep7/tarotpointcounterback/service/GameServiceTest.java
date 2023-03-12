@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.util.ObjectUtils;
 
 import javax.sql.DataSource;
@@ -20,6 +21,7 @@ import java.util.UUID;
 
 @SpringBootTest
 @Slf4j
+@EnabledIf(expression = "#{environment['spring.profiles.active'] == 'integration-test'}")
 public class GameServiceTest {
 
     @BeforeAll
