@@ -4,6 +4,9 @@ import com.sulwep7.tarotpointcounterback.mapper.PlayersScoreMapper;
 import com.sulwep7.tarotpointcounterback.model.entity.PlayerScore;
 import com.sulwep7.tarotpointcounterback.model.dto.PlayerScorePatchRequest;
 import com.sulwep7.tarotpointcounterback.model.dto.PlayerScorePostRequest;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
 @Slf4j
 public class PlayersScoreService {
     @Autowired
