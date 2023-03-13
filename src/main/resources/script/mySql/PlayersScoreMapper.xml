@@ -4,8 +4,8 @@
 <mapper namespace="com.sulwep7.tarotpointcounterback.mapper.PlayersScoreMapper">
     <resultMap id="playerScoreResultMap" type="com.sulwep7.tarotpointcounterback.model.entity.PlayerScore">
         <id property="gameUuid" column="gameUuid"/>
-        <result property="playerName" column="playerName"/>
-        <result property="playerScore" column="playerScore"/>
+        <result property="name" column="playerName"/>
+        <result property="score" column="playerScore"/>
     </resultMap>
 
     <select id="getPlayersScoreOfGame" resultMap="playerScoreResultMap" parameterType="java.lang.String">

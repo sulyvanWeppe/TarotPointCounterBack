@@ -12,7 +12,7 @@ public class PlayerScore {
     @ApiModelProperty(example = "65b68079-f5de-44f9-b871-9c46b0a8e85a")
     private String gameUuid;
     @ApiModelProperty(example = "Player 1")
-    private String playerName;
+    private String name;
     @ApiModelProperty(example = "10")
-    private int playerScore;
+    private int score;
 }

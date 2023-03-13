@@ -16,6 +16,6 @@ public class PingController {
             @ApiResponse(code=200, message = "Application is running")
     })
     public ResponseEntity<String> ping() {
-        return new ResponseEntity("Application is running", HttpStatus.OK);
+        return new ResponseEntity<>("Application is running", HttpStatus.OK);
     }
 }

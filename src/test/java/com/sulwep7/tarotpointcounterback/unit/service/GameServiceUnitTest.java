@@ -3,6 +3,7 @@ package com.sulwep7.tarotpointcounterback.unit.service;
 import com.sulwep7.tarotpointcounterback.mapper.GameMapper;
 import com.sulwep7.tarotpointcounterback.model.entity.Game;
 import com.sulwep7.tarotpointcounterback.model.entity.GameWDetails;
+import com.sulwep7.tarotpointcounterback.model.exception.DataStoringException;
 import com.sulwep7.tarotpointcounterback.service.GameService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -22,14 +23,13 @@ import java.util.UUID;
 
 @SpringBootTest
 @Slf4j
-@EnabledIf(expression = "#{environment['spring.profiles.active'] == 'unit-test'}", loadContext = true)
-public class GameServiceUnitTest {
+class GameServiceUnitTest {
 
     private static GameService gameService;
     private static GameMapper gameMapper;
 
     @BeforeAll
-    public static void initMock() {
+    static void initMock() {
         log.info("Initialize Mock(s)");
         gameMapper = Mockito.mock(GameMapper.class);
         gameService = new GameService();
@@ -37,7 +37,7 @@ public class GameServiceUnitTest {
     }
 
     @Test
-    public void getGames() {
+    void getGames() {
         //GIVEN
         Game game1 = new Game(UUID.randomUUID().toString(), Timestamp.from(Instant.now()),4);
         Game game2 = new Game(UUID.randomUUID().toString(), Timestamp.from(Instant.now()),4);
@@ -52,7 +52,7 @@ public class GameServiceUnitTest {
     }
 
     @Test
-    public void getAllGamesWDetails() {
+    void getAllGamesWDetails() {
         //GIVEN
         String gameUuid = UUID.randomUUID().toString();
         Timestamp timestamp = Timestamp.from(Instant.now());
@@ -71,7 +71,7 @@ public class GameServiceUnitTest {
     }
 
     @Test
-    public void insertNewGame() throws Exception {
+    void insertNewGame() throws DataStoringException {
         //GIVEN
 
         //WHEN

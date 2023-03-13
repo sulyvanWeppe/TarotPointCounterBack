@@ -3,6 +3,7 @@ package com.sulwep7.tarotpointcounterback.service;
 import com.sulwep7.tarotpointcounterback.mapper.GameMapper;
 import com.sulwep7.tarotpointcounterback.model.entity.Game;
 import com.sulwep7.tarotpointcounterback.model.entity.GameWDetails;
+import com.sulwep7.tarotpointcounterback.model.exception.DataStoringException;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class GameService {
         return gamesWDetailsByUuid;
     }
 
-    public UUID insertNewGame(int nrPlayers) throws Exception {
+    public UUID insertNewGame(int nrPlayers) throws DataStoringException {
         try {
             UUID uuid = UUID.randomUUID();
             log.info("Insert new game of {} players",nrPlayers);
@@ -45,7 +46,7 @@ public class GameService {
             return uuid;
         } catch(Exception e) {
             log.error("Error while inserting new Game : [{}]",e);
-            throw new Exception("Error inserting the new game in the DB");
+            throw new DataStoringException("Error inserting the new game in the DB");
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.sulwep7.tarotpointcounterback.unit.service;
 
 import com.sulwep7.tarotpointcounterback.mapper.PlayersScoreMapper;
+import com.sulwep7.tarotpointcounterback.model.exception.DataStoringException;
 import com.sulwep7.tarotpointcounterback.service.PlayersScoreService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,14 +15,13 @@ import java.util.UUID;
 
 @SpringBootTest
 @Slf4j
-@EnabledIf(expression = "#{environment['spring.profiles.active'] == 'unit-test'}", loadContext = true)
-public class PlayersScoreServiceUnitTest {
+class PlayersScoreServiceUnitTest {
 
     private static PlayersScoreService playersScoreService;
     private static PlayersScoreMapper playersScoreMapper;
 
     @BeforeAll
-    public static void initMock() {
+    static void initMock() {
         log.info("Initialize Mock(s)");
         playersScoreService = new PlayersScoreService();
         playersScoreMapper = Mockito.mock(PlayersScoreMapper.class);
@@ -29,7 +29,7 @@ public class PlayersScoreServiceUnitTest {
     }
 
     @Test
-    public void insertPlayerScore() throws Exception{
+    void insertPlayerScore() throws DataStoringException {
         //GIVEN
 
         //WHEN
@@ -40,7 +40,7 @@ public class PlayersScoreServiceUnitTest {
     }
 
     @Test
-    public void updatePlayerScore() throws Exception {
+    void updatePlayerScore() throws DataStoringException {
         //GIVEN
 
         //WHEN

@@ -25,7 +25,7 @@ public class PlayerScoreController {
     })
     public ResponseEntity<String> insertPlayerScore(@ApiParam(value = "New player's score to be added") @RequestBody PlayerScore newPlayerScore) {
         try {
-            playersScoreService.insertPlayerScore(newPlayerScore.getGameUuid(),newPlayerScore.getPlayerName(),newPlayerScore.getPlayerScore());
+            playersScoreService.insertPlayerScore(newPlayerScore.getGameUuid(),newPlayerScore.getName(),newPlayerScore.getScore());
         } catch(Exception e) {
             return new ResponseEntity<>("Error inserting the new player score in the DB", HttpStatus.INTERNAL_SERVER_ERROR);
         }

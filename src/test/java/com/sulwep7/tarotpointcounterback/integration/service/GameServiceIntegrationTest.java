@@ -23,7 +23,6 @@ import java.util.UUID;
 
 @SpringBootTest
 @Slf4j
-@EnabledIf(expression = "#{environment['spring.profiles.active'] == 'integration-test'}", loadContext = true)
 public class GameServiceIntegrationTest {
 
     @BeforeAll
@@ -41,7 +40,7 @@ public class GameServiceIntegrationTest {
     private GameService gameService;
 
     @Test
-    public void insertAndCheck() {
+    void insertAndCheck() {
         log.info("Test inserting new game with 4 players");
         try {
             UUID uuid = gameService.insertNewGame(4);
@@ -54,7 +53,7 @@ public class GameServiceIntegrationTest {
     }
 
     @Test
-    public void getGames() {
+    void getGames() {
         log.info("Test getting all the games from DB");
 
         List<Game> games = gameService.getGames();
@@ -64,7 +63,7 @@ public class GameServiceIntegrationTest {
     }
 
     @Test
-    public void getAllGamesWDetails() {
+    void getAllGamesWDetails() {
         log.info("Test getting all the games with details from DB");
 
         Map<String, List<GameWDetails>> gamesWDetails = gameService.getAllGamesWDetails();
