@@ -95,7 +95,7 @@
 		<profile>
 			<id>coverage</id>
 			<properties>
-				<sonar.exclusions>com/sulwep7/tarotpointcounterback/service/*</sonar.exclusions>
+				<sonar.exclusions>**/com/sulwep7/tarotpointcounterback/model/**/*.java</sonar.exclusions>
 			</properties>
 			<build>
 				<plugins>
@@ -105,8 +105,7 @@
 						<version>0.8.8</version>
 						<configuration>
 							<excludes>
-								<exclude>com/sulwep7/tarotpointcounterback/service/*.class</exclude>
-								<exclude>com/sulwep7/tarotpointcounterback/service/*.java</exclude>
+								<exclude>com/sulwep7/tarotpointcounterback/model/*.java</exclude>
 							</excludes>
 						</configuration>
 						<executions>
