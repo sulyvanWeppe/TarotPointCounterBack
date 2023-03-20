@@ -1,4 +1,4 @@
-package com.sulwep7.tarotpointcounterback.configuration.dataSource;
+package com.sulwep7.tarotpointcounterback.configuration.datasource;
 
 import org.apache.ibatis.datasource.pooled.PooledDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -17,9 +17,7 @@ public class DataSourceConfiguration {
     @Bean
     @ConfigurationProperties(prefix = "jdbc.mysql")
     public DataSource mySqlDataSource() {
-        PooledDataSource dataSource = new PooledDataSource();
-
-        return dataSource;
+        return new PooledDataSource();
     }
 
     @Bean

@@ -23,7 +23,7 @@ import java.util.UUID;
 
 @SpringBootTest
 @Slf4j
-public class GameServiceIntegrationTest {
+class GameServiceIntegrationTest {
 
     @BeforeAll
     static void populateDB(@Autowired DataSource dataSource) {

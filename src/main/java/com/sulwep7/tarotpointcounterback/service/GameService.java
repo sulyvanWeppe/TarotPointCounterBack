@@ -1,5 +1,6 @@
 package com.sulwep7.tarotpointcounterback.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sulwep7.tarotpointcounterback.mapper.GameMapper;
 import com.sulwep7.tarotpointcounterback.model.entity.Game;
 import com.sulwep7.tarotpointcounterback.model.entity.GameWDetails;
@@ -32,9 +33,7 @@ public class GameService {
         log.info("Get all games with their details");
         List<GameWDetails> gameWDetailsList = gameMapper.getAllGamesWDetails();
 
-        Map<String,List<GameWDetails>> gamesWDetailsByUuid = gameWDetailsList.stream().collect(Collectors.groupingBy(GameWDetails::getGameUuid));
-
-        return gamesWDetailsByUuid;
+        return gameWDetailsList.stream().collect(Collectors.groupingBy(GameWDetails::getGameUuid));
     }
 
     public UUID insertNewGame(int nrPlayers) throws DataStoringException {

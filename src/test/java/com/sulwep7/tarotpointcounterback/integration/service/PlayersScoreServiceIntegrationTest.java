@@ -26,7 +26,7 @@ import java.util.UUID;
 
 @SpringBootTest
 @Slf4j
-public class PlayersScoreServiceIntegrationTest {
+class PlayersScoreServiceIntegrationTest {
 
     @Autowired
     private PlayersScoreService playersScoreService;
@@ -138,7 +138,7 @@ public class PlayersScoreServiceIntegrationTest {
         List<GameWDetails> gamePlayers = allGames.get(gameUuid);
         for(int i=0; i<3; i++) {
             GameWDetails player = gamePlayers.get(i);
-            Assertions.assertTrue(player.getPlayerScore()==10);
+            Assertions.assertEquals(10,player.getPlayerScore());
         }
     }
 }
