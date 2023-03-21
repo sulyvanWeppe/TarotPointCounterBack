@@ -97,7 +97,8 @@
 			<properties>
 				<sonar.exclusions>
 					**/com/sulwep7/tarotpointcounterback/model/**/*.java,
-					**/com/sulwep7/tarotpointcounterback/TarotPointCounterBackApplication.java
+					**/com/sulwep7/tarotpointcounterback/TarotPointCounterBackApplication.java,
+					**/com/sulwep7/tarotpointcounterback/mapper/*.java
 				</sonar.exclusions>
 			</properties>
 			<build>

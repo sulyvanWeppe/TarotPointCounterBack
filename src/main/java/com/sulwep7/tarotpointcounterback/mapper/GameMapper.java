@@ -2,7 +2,6 @@ package com.sulwep7.tarotpointcounterback.mapper;
 
 import com.sulwep7.tarotpointcounterback.model.entity.Game;
 import com.sulwep7.tarotpointcounterback.model.entity.GameWDetails;
-import jdk.jshell.spi.ExecutionControlProvider;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
