@@ -9,7 +9,6 @@ import com.sulwep7.tarotpointcounterback.model.entity.PlayerScore;
 import com.sulwep7.tarotpointcounterback.model.exception.DataStoringException;
 import com.sulwep7.tarotpointcounterback.service.PlayersScoreService;
 import lombok.extern.slf4j.Slf4j;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;

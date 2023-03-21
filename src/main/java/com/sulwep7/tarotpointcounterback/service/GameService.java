@@ -1,11 +1,9 @@
 package com.sulwep7.tarotpointcounterback.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sulwep7.tarotpointcounterback.mapper.GameMapper;
 import com.sulwep7.tarotpointcounterback.model.entity.Game;
 import com.sulwep7.tarotpointcounterback.model.entity.GameWDetails;
 import com.sulwep7.tarotpointcounterback.model.exception.DataStoringException;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +16,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-@Setter
 @Slf4j
 public class GameService {
     @Autowired

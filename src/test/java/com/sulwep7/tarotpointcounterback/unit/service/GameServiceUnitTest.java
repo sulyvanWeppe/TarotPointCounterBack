@@ -7,12 +7,12 @@ import com.sulwep7.tarotpointcounterback.model.exception.DataStoringException;
 import com.sulwep7.tarotpointcounterback.service.GameService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.EnabledIf;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -25,16 +25,10 @@ import java.util.UUID;
 @Slf4j
 class GameServiceUnitTest {
 
-    private static GameService gameService;
-    private static GameMapper gameMapper;
-
-    @BeforeAll
-    static void initMock() {
-        log.info("Initialize Mock(s)");
-        gameMapper = Mockito.mock(GameMapper.class);
-        gameService = new GameService();
-        gameService.setGameMapper(gameMapper);
-    }
+    @Autowired
+    private GameService gameService;
+    @MockBean
+    private GameMapper gameMapper;
 
     @Test
     void getGames() {
@@ -71,7 +65,7 @@ class GameServiceUnitTest {
     }
 
     @Test
-    void insertNewGame() throws DataStoringException {
+    void insertNewGameOk() throws Exception {
         //GIVEN
 
         //WHEN
@@ -79,5 +73,16 @@ class GameServiceUnitTest {
 
         //THEN
         Mockito.verify(gameMapper).insertGame(ArgumentMatchers.anyString(),ArgumentMatchers.any(Timestamp.class),ArgumentMatchers.anyInt());
+    }
+
+    @Test
+    void insertNewGameException() throws Exception {
+        //GIVEN
+        Mockito.doThrow(new Exception()).when(gameMapper).insertGame(ArgumentMatchers.anyString(),ArgumentMatchers.any(Timestamp.class),ArgumentMatchers.anyInt());
+
+        //WHEN
+        //THEN
+        DataStoringException exception = Assert.assertThrows(DataStoringException.class, () -> gameService.insertNewGame(4));
+        Assert.assertEquals("Error inserting the new game in the DB",exception.getMessage());
     }
 }

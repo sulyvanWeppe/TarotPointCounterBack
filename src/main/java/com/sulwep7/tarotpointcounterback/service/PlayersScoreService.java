@@ -5,9 +5,7 @@ import com.sulwep7.tarotpointcounterback.model.entity.PlayerScore;
 import com.sulwep7.tarotpointcounterback.model.dto.PlayerScorePatchRequest;
 import com.sulwep7.tarotpointcounterback.model.dto.PlayerScorePostRequest;
 import com.sulwep7.tarotpointcounterback.model.exception.DataStoringException;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +14,6 @@ import java.util.List;
 
 @Service
 @NoArgsConstructor
-@Setter
 @Slf4j
 public class PlayersScoreService {
     @Autowired

@@ -95,7 +95,10 @@
 		<profile>
 			<id>coverage</id>
 			<properties>
-				<sonar.exclusions>**/com/sulwep7/tarotpointcounterback/model/**/*.java</sonar.exclusions>
+				<sonar.exclusions>
+					**/com/sulwep7/tarotpointcounterback/model/**/*.java,
+					**/com/sulwep7/tarotpointcounterback/TarotPointCounterBackApplication.java
+				</sonar.exclusions>
 			</properties>
 			<build>
 				<plugins>
@@ -130,21 +133,6 @@
 					</plugin>
 				</plugins>
 			</build>
-		</profile>
-		<profile>
-			<id>integration-test</id>
-			<properties>
-				<activatedProperties>integration-test</activatedProperties>
-			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-		</profile>
-		<profile>
-			<id>unit-test</id>
-			<properties>
-				<activatedProperties>unit-test</activatedProperties>
-			</properties>
 		</profile>
 	</profiles>
 
