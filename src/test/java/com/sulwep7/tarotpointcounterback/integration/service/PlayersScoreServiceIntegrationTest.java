@@ -3,6 +3,7 @@ package com.sulwep7.tarotpointcounterback.integration.service;
 import com.sulwep7.tarotpointcounterback.model.dto.PlayerScorePatchRequest;
 import com.sulwep7.tarotpointcounterback.model.dto.PlayerScorePostRequest;
 import com.sulwep7.tarotpointcounterback.model.entity.GameWDetails;
+import com.sulwep7.tarotpointcounterback.model.exception.DataStoringException;
 import com.sulwep7.tarotpointcounterback.service.GameService;
 import com.sulwep7.tarotpointcounterback.service.PlayersScoreService;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
-import org.springframework.test.context.junit.jupiter.EnabledIf;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -25,8 +25,7 @@ import java.util.UUID;
 
 @SpringBootTest
 @Slf4j
-@EnabledIf(expression = "#{environment['spring.profiles.active'] == 'integration-test'}", loadContext = true)
-public class PlayersScoreServiceIntegrationTest {
+class PlayersScoreServiceIntegrationTest {
 
     @Autowired
     private PlayersScoreService playersScoreService;
@@ -44,7 +43,7 @@ public class PlayersScoreServiceIntegrationTest {
         }
     }
 
-    private String createGame(int nrPlayers) throws Exception{
+    private String createGame(int nrPlayers) throws DataStoringException{
         UUID gameUuid = gameService.insertNewGame(3);
         log.info("Game created with Uuid {}",gameUuid.toString());
         Assertions.assertNotNull(gameUuid);
@@ -52,7 +51,7 @@ public class PlayersScoreServiceIntegrationTest {
         return gameUuid.toString();
     }
 
-    private String createGameWPlayersOneByONe(int nrPlayers) throws Exception {
+    private String createGameWPlayersOneByONe(int nrPlayers) throws DataStoringException {
         log.info("Step 1: create game of {} players",nrPlayers);
         String gameUuid = createGame(nrPlayers);
 
@@ -75,12 +74,12 @@ public class PlayersScoreServiceIntegrationTest {
     }
 
     @Test
-    public void insertPlayerScore() throws Exception{
+    void insertPlayerScore() throws DataStoringException{
         log.info("Test inserting player score (insert players one by one)");
         createGameWPlayersOneByONe(3);
     }
 
-    private String createGameWPlayersGrouped(int nrPlayers) throws Exception {
+    private String createGameWPlayersGrouped(int nrPlayers) throws DataStoringException {
         log.info("Step 1: create game of {} players",nrPlayers);
         String gameUuid = createGame(nrPlayers);
         Assertions.assertNotNull(gameUuid);
@@ -109,14 +108,14 @@ public class PlayersScoreServiceIntegrationTest {
     }
 
     @Test
-    public void insertPlayersScore() throws Exception{
+    void insertPlayersScore() throws DataStoringException{
         log.info("Test inserting multiple player scores for 1 game");
 
         createGameWPlayersGrouped(3);
     }
 
     @Test
-    public void updatePlayersScore() throws Exception{
+    void updatePlayersScore() throws DataStoringException {
         log.info("Test updating score of all players for a given game");
 
         String gameUuid = createGameWPlayersGrouped(3);
@@ -138,7 +137,7 @@ public class PlayersScoreServiceIntegrationTest {
         List<GameWDetails> gamePlayers = allGames.get(gameUuid);
         for(int i=0; i<3; i++) {
             GameWDetails player = gamePlayers.get(i);
-            Assertions.assertTrue(player.getPlayerScore()==10);
+            Assertions.assertEquals(10,player.getPlayerScore());
         }
     }
 }

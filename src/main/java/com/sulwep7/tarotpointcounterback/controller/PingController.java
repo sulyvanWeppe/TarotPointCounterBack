@@ -1,7 +1,6 @@
 package com.sulwep7.tarotpointcounterback.controller;
 
 import io.swagger.annotations.*;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +16,6 @@ public class PingController {
             @ApiResponse(code=200, message = "Application is running")
     })
     public ResponseEntity<String> ping() {
-        return new ResponseEntity("Application is running", HttpStatus.OK);
+        return new ResponseEntity<>("Application is running", HttpStatus.OK);
     }
 }

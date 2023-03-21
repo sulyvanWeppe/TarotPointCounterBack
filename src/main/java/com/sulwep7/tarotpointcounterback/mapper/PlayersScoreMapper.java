@@ -10,9 +10,9 @@ import java.util.List;
 public interface PlayersScoreMapper {
 
     List<PlayerScore> getPlayersScoreOfGame(@Param("GAME_UUID")String gameUuid);
-    void insertPlayerScore(@Param("GAME_UUID")String gameUuid, @Param("PLAYER_NAME")String playerName, @Param("PLAYER_SCORE")int playerScore);
+    void insertPlayerScore(@Param("GAME_UUID")String gameUuid, @Param("PLAYER_NAME")String playerName, @Param("PLAYER_SCORE")int playerScore) throws Exception;
 
-    void updatePlayerScore(@Param("GAME_UUID") String gameUuid, @Param("PLAYER_NAME")String playerName, @Param("PLAYER_SCORE")int playerScore);
+    void updatePlayerScore(@Param("GAME_UUID") String gameUuid, @Param("PLAYER_NAME")String playerName, @Param("PLAYER_SCORE")int playerScore) throws Exception;
 
-    void deletePlayerScore(@Param("GAME_UUID") String gameUuid, @Param("PLAYER_NAME")String playerName);
+    void deletePlayerScore(@Param("GAME_UUID") String gameUuid, @Param("PLAYER_NAME")String playerName) throws Exception;
 }

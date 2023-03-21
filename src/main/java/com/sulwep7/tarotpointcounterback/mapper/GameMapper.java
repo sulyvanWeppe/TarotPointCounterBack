@@ -13,7 +13,7 @@ public interface GameMapper {
 
     List<Game> getAllGames();
 
-    void insertGame(@Param("UUID") String uuid, @Param("TIMESTAMP")Timestamp timestamp, @Param("NR_PLAYERS")int nrPlayers);
+    void insertGame(@Param("UUID") String uuid, @Param("TIMESTAMP")Timestamp timestamp, @Param("NR_PLAYERS")int nrPlayers) throws Exception;
 
     List<GameWDetails> getAllGamesWDetails();
 }

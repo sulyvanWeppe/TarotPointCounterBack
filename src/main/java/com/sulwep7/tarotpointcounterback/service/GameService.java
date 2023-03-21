@@ -3,21 +3,19 @@ package com.sulwep7.tarotpointcounterback.service;
 import com.sulwep7.tarotpointcounterback.mapper.GameMapper;
 import com.sulwep7.tarotpointcounterback.model.entity.Game;
 import com.sulwep7.tarotpointcounterback.model.entity.GameWDetails;
-import lombok.Setter;
+import com.sulwep7.tarotpointcounterback.model.exception.DataStoringException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-@Setter
 @Slf4j
 public class GameService {
     @Autowired
@@ -32,12 +30,10 @@ public class GameService {
         log.info("Get all games with their details");
         List<GameWDetails> gameWDetailsList = gameMapper.getAllGamesWDetails();
 
-        Map<String,List<GameWDetails>> gamesWDetailsByUuid = gameWDetailsList.stream().collect(Collectors.groupingBy(GameWDetails::getGameUuid));
-
-        return gamesWDetailsByUuid;
+        return gameWDetailsList.stream().collect(Collectors.groupingBy(GameWDetails::getGameUuid));
     }
 
-    public UUID insertNewGame(int nrPlayers) throws Exception {
+    public UUID insertNewGame(int nrPlayers) throws DataStoringException {
         try {
             UUID uuid = UUID.randomUUID();
             log.info("Insert new game of {} players",nrPlayers);
@@ -46,7 +42,7 @@ public class GameService {
             return uuid;
         } catch(Exception e) {
             log.error("Error while inserting new Game : [{}]",e);
-            throw new Exception("Error inserting the new game in the DB");
+            throw new DataStoringException("Error inserting the new game in the DB");
         }
     }
 }

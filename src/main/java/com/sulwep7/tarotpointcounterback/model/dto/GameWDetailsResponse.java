@@ -1,7 +1,6 @@
 package com.sulwep7.tarotpointcounterback.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
@@ -9,7 +8,6 @@ import lombok.Getter;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.UUID;
 
 @Builder
 @Getter
