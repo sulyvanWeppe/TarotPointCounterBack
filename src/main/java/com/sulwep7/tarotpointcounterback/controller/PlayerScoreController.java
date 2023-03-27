@@ -1,5 +1,6 @@
 package com.sulwep7.tarotpointcounterback.controller;
 
+import com.sulwep7.tarotpointcounterback.annotation.metrics.EnableApiMetric;
 import com.sulwep7.tarotpointcounterback.model.entity.PlayerScore;
 import com.sulwep7.tarotpointcounterback.model.dto.PlayersScorePatchRequest;
 import com.sulwep7.tarotpointcounterback.model.dto.PlayersScorePostRequest;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping
@@ -23,7 +26,8 @@ public class PlayerScoreController {
             @ApiResponse(code = 201, message = "New player's score was added"),
             @ApiResponse(code = 500, message = "Internal server error occurred")
     })
-    public ResponseEntity<String> insertPlayerScore(@ApiParam(value = "New player's score to be added") @RequestBody PlayerScore newPlayerScore) {
+    @EnableApiMetric
+    public ResponseEntity<String> insertPlayerScore(@ApiParam(value = "New player's score to be added") @RequestBody PlayerScore newPlayerScore, HttpServletRequest httpServletRequest) {
         try {
             playersScoreService.insertPlayerScore(newPlayerScore.getGameUuid(),newPlayerScore.getName(),newPlayerScore.getScore());
         } catch(Exception e) {
@@ -39,7 +43,8 @@ public class PlayerScoreController {
             @ApiResponse(code = 201, message = "New player's scores were added"),
             @ApiResponse(code = 500, message = "Internal server error occurred")
     })
-    public ResponseEntity<String> insertPlayersScore(@ApiParam(value = "New player's scores to be added") @RequestBody PlayersScorePostRequest playersScorePostRequest) {
+    @EnableApiMetric
+    public ResponseEntity<String> insertPlayersScore(@ApiParam(value = "New player's scores to be added") @RequestBody PlayersScorePostRequest playersScorePostRequest, HttpServletRequest httpServletRequest) {
         try {
             playersScoreService.insertPlayersScore(playersScorePostRequest.getGameUuid(),playersScorePostRequest.getPlayerScorePostRequestList());
         } catch(Exception e) {
@@ -55,7 +60,8 @@ public class PlayerScoreController {
             @ApiResponse(code = 200, message = "Scores were updated"),
             @ApiResponse(code = 500, message = "Internal server error occurred")
     })
-    public ResponseEntity<String> updatePlayersScore(@ApiParam(value="Scores to be updated") @RequestBody PlayersScorePatchRequest playersScorePatchRequest) {
+    @EnableApiMetric
+    public ResponseEntity<String> updatePlayersScore(@ApiParam(value="Scores to be updated") @RequestBody PlayersScorePatchRequest playersScorePatchRequest, HttpServletRequest httpServletRequest) {
         String gameUuid = playersScorePatchRequest.getGameUuid();
         try {
             playersScoreService.updatePlayersScore(gameUuid,playersScorePatchRequest.getPlayerScorePatchRequests());

@@ -27,7 +27,6 @@ public class PingController {
     })
     @EnableApiMetric
     public ResponseEntity<String> ping(HttpServletRequest httpServletRequest) {
-        //Test
         return new ResponseEntity<>("Application is running", HttpStatus.OK);
     }
 }

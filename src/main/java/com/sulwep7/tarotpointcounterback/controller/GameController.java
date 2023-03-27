@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,8 @@ public class GameController {
             @ApiResponse(code = 200, message = "The list of the games was successfully retrieved"),
             @ApiResponse(code = 404, message = "No game was found")
     })
-    public ResponseEntity<List<Game>> getGames() {
+    @EnableApiMetric
+    public ResponseEntity<List<Game>> getGames(HttpServletRequest httpServletRequest) {
         List<Game> games = gameService.getGames();
         if(games==null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -50,7 +52,8 @@ public class GameController {
             @ApiResponse(code = 200, message = "The list of the games with their details was retrieved"),
             @ApiResponse(code = 404, message = "No game was found")
     })
-    public ResponseEntity<GamesWDetailsResponse> getAllGamesWDetails() {
+    @EnableApiMetric
+    public ResponseEntity<GamesWDetailsResponse> getAllGamesWDetails(HttpServletRequest httpServletRequest) {
         Map<String, List<GameWDetails>> gamesWDetailsByUuid = gameService.getAllGamesWDetails();
         if(gamesWDetailsByUuid==null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -87,7 +90,7 @@ public class GameController {
             @ApiResponse(code = 500, message = "Internal server error occurred")
     })
     @EnableApiMetric
-    public ResponseEntity<String> insertGame(@ApiParam(value="New game to be inserted") @RequestBody GamePostRequest newGame) {
+    public ResponseEntity<String> insertGame(@ApiParam(value="New game to be inserted") @RequestBody GamePostRequest newGame, HttpServletRequest httpServletRequest) {
          try {
              UUID uuid = gameService.insertNewGame(newGame.getNrPlayers());
 
