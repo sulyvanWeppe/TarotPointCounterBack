@@ -1,7 +1,7 @@
 package com.sulwep7.tarotpointcounterback.configuration.kafka;
 
 import com.sulwep7.metricscommon.model.ApiMetric;
-import com.sulwep7.tarotpointcounterback.kafka.producer.KafkaProducerProperties;
+import com.sulwep7.tarotpointcounterback.kafka.producer.KafkaProducerApiMetricsProperties;
 import lombok.AllArgsConstructor;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -16,11 +16,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@EnableConfigurationProperties(KafkaProducerProperties.class)
+@EnableConfigurationProperties(KafkaProducerApiMetricsProperties.class)
 @AllArgsConstructor
 public class KafkaProducerConfiguration {
 
-    private final KafkaProducerProperties kafkaProducerProperties;
+    private final KafkaProducerApiMetricsProperties kafkaProducerProperties;
 
     @Bean
     public ProducerFactory<String, ApiMetric> producerFactory() {

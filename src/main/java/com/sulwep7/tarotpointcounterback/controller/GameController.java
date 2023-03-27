@@ -1,5 +1,6 @@
 package com.sulwep7.tarotpointcounterback.controller;
 
+import com.sulwep7.tarotpointcounterback.annotation.metrics.EnableApiMetric;
 import com.sulwep7.tarotpointcounterback.model.dto.GamePostRequest;
 import com.sulwep7.tarotpointcounterback.model.dto.GameWDetailsPlayerResponse;
 import com.sulwep7.tarotpointcounterback.model.dto.GameWDetailsResponse;
@@ -85,6 +86,7 @@ public class GameController {
             )),
             @ApiResponse(code = 500, message = "Internal server error occurred")
     })
+    @EnableApiMetric
     public ResponseEntity<String> insertGame(@ApiParam(value="New game to be inserted") @RequestBody GamePostRequest newGame) {
          try {
              UUID uuid = gameService.insertNewGame(newGame.getNrPlayers());

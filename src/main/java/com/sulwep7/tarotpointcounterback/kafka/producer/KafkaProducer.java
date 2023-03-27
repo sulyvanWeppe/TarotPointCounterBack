@@ -13,17 +13,14 @@ import java.time.Instant;
 
 @Component
 @Slf4j
-@EnableConfigurationProperties(KafkaProducerProperties.class)
+@EnableConfigurationProperties(KafkaProducerApiMetricsProperties.class)
 @AllArgsConstructor
 public class KafkaProducer {
-    private final KafkaProducerProperties kafkaProducerProperties;
+    private final KafkaProducerApiMetricsProperties kafkaProducerApiMetricsProperties;
     @Autowired
     KafkaTemplate<String, ApiMetric> kafkaTemplate;
 
-    public void send(String msg) {
-        log.info("SWE topic = "+kafkaProducerProperties.getTopicName());
-        ApiMetric apiMetric = ApiMetric.builder().path("totoPath").timestamp(Timestamp.from(Instant.now())).build();
-        log.info("SWE toto");
-        kafkaTemplate.send(kafkaProducerProperties.getTopicName(),apiMetric);
+    public void send(ApiMetric apiMetric) {
+        kafkaTemplate.send(kafkaProducerApiMetricsProperties.getTopicName(),apiMetric);
     }
 }
