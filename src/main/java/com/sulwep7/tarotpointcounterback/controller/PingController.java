@@ -1,10 +1,10 @@
 package com.sulwep7.tarotpointcounterback.controller;
 
+import com.sulwep7.tarotpointcounterback.kafka.producer.KafkaProducer;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PingController {
 
     @Autowired
-    KafkaTemplate kafkaTemplate;
+    KafkaProducer kafkaProducer;
 
     @GetMapping
     @ApiOperation(value = "Pinging endpoint to ensure the app is up")
@@ -23,7 +23,7 @@ public class PingController {
     })
     public ResponseEntity<String> ping() {
         //Test
-        kafkaTemplate.send("api-calls-metrics","this is a test from toto");
+        kafkaProducer.send("this is a test from toto");
 
         return new ResponseEntity<>("Application is running", HttpStatus.OK);
     }
