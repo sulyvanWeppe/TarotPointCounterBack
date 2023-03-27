@@ -4,3 +4,13 @@ jdbc:
     username: sulyvan
     password: toto
     driver: com.mysql.cj.jdbc.Driver
+
+spring:
+  kafka:
+    producer:
+      api-calls-metrics-topic:
+        topicName: "api-calls-metrics"
+        bootstrapServers: "localhost:9092"
+        groupId: "monitoring-dashboard-application"
+        keySerializer: "org.apache.kafka.common.serialization.StringSerializer"
+        valueSerializer: "org.apache.kafka.common.serialization.JsonSerializer"
