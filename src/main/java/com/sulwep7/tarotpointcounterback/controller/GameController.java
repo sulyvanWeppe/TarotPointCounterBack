@@ -1,6 +1,6 @@
 package com.sulwep7.tarotpointcounterback.controller;
 
-import com.sulwep7.tarotpointcounterback.annotation.metrics.EnableApiMetric;
+import com.sulwep7.metricscommon.annotation.EnableApiMetric;
 import com.sulwep7.tarotpointcounterback.model.dto.GamePostRequest;
 import com.sulwep7.tarotpointcounterback.model.dto.GameWDetailsPlayerResponse;
 import com.sulwep7.tarotpointcounterback.model.dto.GameWDetailsResponse;

@@ -13,4 +13,8 @@ spring:
         bootstrapServers: "localhost:9092"
         groupId: "monitoring-dashboard-application"
         keySerializer: "org.apache.kafka.common.serialization.StringSerializer"
-        valueSerializer: "org.apache.kafka.common.serialization.JsonSerializer"
+        valueSerializer: "org.springframework.kafka.support.serializer.JsonSerializer"
+
+metrics:
+  api:
+    enabled: true
