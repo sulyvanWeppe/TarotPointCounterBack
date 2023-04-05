@@ -12,4 +12,15 @@ spring:
     hibernate:
       ddl-auto: update
     spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+  kafka:
+    producer:
+      api-calls-metrics-topic:
+        topicName: "api-calls-metrics"
+        bootstrapServers: "localhost:9092"
+        groupId: "monitoring-dashboard-application"
+        keySerializer: "org.apache.kafka.common.serialization.StringSerializer"
+        valueSerializer: "org.springframework.kafka.support.serializer.JsonSerializer"
 
+metrics:
+  api:
+    enabled: false
